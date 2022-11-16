@@ -1,8 +1,5 @@
 package com.example.rvtest;
-import com.example.rvtest.JSon;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,9 +20,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.AbstractCollection;
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
    // private static AbstractCollection<JsonObjectRequest> mRequestQueue;
     private RequestQueue mRequestQueue;
@@ -35,20 +29,34 @@ public class MainActivity extends AppCompatActivity {
     private TextView High;
     private TextView Low;
     private EditText ED;
+    private Button recbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mRequestQueue = Volley.newRequestQueue(this);
+        recbtn=findViewById(R.id.rceom);
         Dis=findViewById(R.id.text1);
         Cur=findViewById(R.id.textc);
         High=findViewById(R.id.texth);
         Low=findViewById(R.id.textl);
         bt=findViewById(R.id.btn);
 ED=findViewById(R.id.edit1);
+recbtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if (ED.getText().length()==0)
+            Toast.makeText(MainActivity.this, "PLEASE ENTER VALID TEXT", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, advice.class);
+        intent.putExtra("city",ED.getText().toString()+"");
+        startActivity(intent);
+    }
+});
         bt.setOnLongClickListener(new View.OnLongClickListener() {
     @Override
     public boolean onLongClick(View view) {
+        if (ED.getText().length()==0)
+            Toast.makeText(MainActivity.this, "PLEASE ENTER VALID TEXT", Toast.LENGTH_SHORT).show();
         String s=ED.getText().toString()+"";
        parseJSON(s);
         return false;
@@ -57,6 +65,9 @@ ED=findViewById(R.id.edit1);
 bt.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+        if (ED.getText().length()==0)
+            Toast.makeText(MainActivity.this, "PLEASE ENTER VALID TEXT", Toast.LENGTH_SHORT).show();
+        else
         Toast.makeText(MainActivity.this, "City: "+ED.getText(), Toast.LENGTH_SHORT).show();
        // String s=ED.getText().toString()+"";
         Intent intent = new Intent(MainActivity.this, DateWise.class);
@@ -92,8 +103,8 @@ bt.setOnClickListener(new View.OnClickListener() {
                             //      for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject hit = jsonArray.getJSONObject(0);
                             Cur.setText((FtoC(hit.getString("temp")))+"°C");
-                            High.setText("High:"+FtoC(hit.getString("tempmax"))+"°C");
-                            Low.setText("Low:"+FtoC(hit.getString("tempmin"))+"°C");
+                            High.setText("High: "+FtoC(hit.getString("tempmax"))+"°C");
+                            Low.setText("Low: "+FtoC(hit.getString("tempmin"))+"°C");
                             Dis.setText((hit.getString("description")));
 
                             //m1.add(hit.getString("tempmax"));
@@ -106,19 +117,7 @@ bt.setOnClickListener(new View.OnClickListener() {
                           //  m1.add("error");
                             e.printStackTrace();
                         }
-                        /*try {
-                           // for (int i = 0; i < jsonArray.length(); i++) {
-                                       JSONObject hit = jsonArray.getJSONObject(0);
-   date=hit.getString("discr");
 
-//                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-//JSONObject jb=response.getJSONObject("location");
-
-
-//return "ff";
                     }
                 }, new Response.ErrorListener() {
             @Override

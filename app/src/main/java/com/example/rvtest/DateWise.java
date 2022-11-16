@@ -75,7 +75,7 @@ String s=getIntent().getStringExtra("key");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject hit = jsonArray.getJSONObject(i);
-                                list.add(new example_item(address[0],"Date: "+hit.getString("datetime"),hit.getString("temp"),"High "+hit.getString("tempmax"),hit.getString("tempmin"),hit.getString("windspeed"),hit.getString("precip"),hit.getString("snow")));
+                                list.add(new example_item(address[0],"Date: "+hit.getString("datetime"),hit.getString("temp"),"High "+hit.getString("tempmax"),hit.getString("tempmin"),hit.getString("windspeed"),hit.getString("precip"),hit.getString("snow"),hit.getString("icon")));
 
                             }
 
@@ -116,7 +116,7 @@ String s=getIntent().getStringExtra("key");
                                 JSONObject hit1 = jsonArray1.getJSONObject(i);
                                 // if (hit.getString(""))
                                 String st = hit1.getString("temp");
-                                list.add(new example_item(city,"Time: "+hit1.getString("datetime"),hit1.getString("temp"),"FeelsLike "+hit.getString("tempmax"),hit.getString("tempmin"),hit1.getString("windspeed"),hit1.getString("precip"),hit1.getString("snow")));
+                                list.add(new example_item(city,"Time: "+hit1.getString("datetime"),hit1.getString("temp"),"FeelsLike "+hit.getString("tempmax"),hit.getString("tempmin"),hit1.getString("windspeed"),hit1.getString("precip"),hit1.getString("snow"), hit1.getString("icon")));
 
                             }//}}
                             mExampleAdapter = new ExampleAdapter(DateWise.this, list);

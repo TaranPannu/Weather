@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RVTest">
         <activity
-            android:name=".Timewise"
-            android:exported="false" />
+            android:name=".discrip"
+            android:exported="false"
+            android:parentActivityName=".advice"/>
+        <activity
+            android:name=".advice"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".DateWise"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
